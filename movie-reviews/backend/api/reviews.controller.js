@@ -19,7 +19,45 @@ export default class ReviewsController {
         date,
       );
 
-      res.json({ status: "success " });
+      res.json({ status: "success" });
+    } catch (e) {
+      res.status(500).json({ error: e.message });
+    }
+  }
+
+  static async apiUpdateReview(req, res, next) {
+    try {
+      const reviewId = req.body.review_id;
+      const userId = req.body.user_id;
+      const review = req.body.review;
+      const date = new Date();
+
+      const ReviewResponse = await ReviewsDAO.updateReview(
+        reviewId,
+        userId,
+        review,
+        date,
+      );
+
+      if (ReviewResponse.modifiedCount === 0) {
+        res.status(404).json({ error: "Review not found or user not authorized" });
+        return;
+      }
+
+      res.json({ status: "success" });
+    } catch (e) {
+      res.status(500).json({ error: e.message });
+    }
+  }
+
+  static async apiDeleteReview(req, res, next) {
+    try {
+      const reviewId = req.body.review_id;
+      const userId = req.body.user_id;
+
+      const ReviewResponse = await ReviewsDAO.deleteReview(reviewId, userId);
+
+      res.json({ status: "success" });
     } catch (e) {
       res.status(500).json({ error: e.message });
     }

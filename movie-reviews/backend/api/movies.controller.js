@@ -41,6 +41,7 @@ export default class MoviesController {
         return;
       }
       res.json(movie);
+      
     } catch (e) {
       console.log(`api, ${e}`);
       res.status(500).json({ error: e });

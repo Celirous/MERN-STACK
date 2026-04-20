@@ -1,5 +1,5 @@
 import mongodb from "mongodb";
-const ObjectId = mongodb.ObjectID;
+import { ObjectId } from 'mongodb';
 
 let movies;
 
