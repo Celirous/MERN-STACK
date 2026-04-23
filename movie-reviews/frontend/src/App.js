@@ -23,7 +23,9 @@ function App() {
   return (
     <div className="App">
       <Navbar bg="dark" variant="dark" expand="lg">
-        <Navbar.Brand href="#home">Movie Reviews</Navbar.Brand>
+        <Navbar.Brand href="/">
+        <Link to={"/"} style={{ textDecoration: "none", color: "white", fontWeight: "bold" }}>Movie Reviews</Link>
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">

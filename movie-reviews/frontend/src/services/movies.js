@@ -30,3 +30,10 @@ class MovieDataService {
 }
 
 export default new MovieDataService();
+
+
+// This file provides a service for interacting with the movie API.
+// It uses Axios to send HTTP requests to the backend.
+// The service includes methods to fetch movies, search movies,
+// and create, update, or delete reviews.
+// It acts as a central place for all movie-related API calls.

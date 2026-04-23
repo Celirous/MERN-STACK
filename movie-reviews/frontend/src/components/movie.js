@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import MovieDataService from "../services/movies";
 import { Link, useParams } from "react-router-dom";
+import moment from "moment";
 
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import Button from "react-bootstrap/Button";
 
 const Movie = (props) => {
   const { id } = useParams();
@@ -46,14 +48,39 @@ const Movie = (props) => {
               <Card.Body>
                 <Card.Text>{movie.plot}</Card.Text>
                 {props.user && (
-                  <Link to={"/movies/" + id + "/review"}>
-                    Add Review
-                  </Link>
+                  <Link to={"/movies/" + id + "/review"}>Add Review</Link>
                 )}
               </Card.Body>
             </Card>
             <br />
             <h2>Reviews</h2>
+            <br />
+            {movie.reviews.map((review, index) => {
+              return (
+                <div key={index} className="mb-3">
+                  <h5>
+                    {review.name + " reviewed on "}{" "}
+                    {moment(review.date).format("Do MMMM YYYY")}
+                  </h5>
+                  <p>{review.review}</p>
+                  {props.user && props.user.id === review.user_id && (
+                    <Row>
+                      <Col>
+                        <Link
+                          to={"/movies/" + id + "/review"}
+                          state={{ currentReview: review }}
+                        >
+                          Edit
+                        </Link>
+                      </Col>
+                      <Col>
+                        <Button variant="link">Delete</Button>
+                      </Col>
+                    </Row>
+                  )}
+                </div>
+              );
+            })}
           </Col>
         </Row>
       </Container>
@@ -62,3 +89,8 @@ const Movie = (props) => {
 };
 
 export default Movie;
+
+// This component displays detailed information about a single movie.
+// It fetches movie data from the backend using the movie ID from the URL.
+// The component shows the movie poster, title, plot, and a list of reviews.
+// Logged-in users can add, edit, or delete their own reviews.
