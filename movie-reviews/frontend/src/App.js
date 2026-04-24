@@ -12,8 +12,8 @@ import Navbar from "react-bootstrap/Navbar";
 
 function App() {
   const [user, setUser] = React.useState(null);
+
   async function login(user = null) {
-    // default user to null
     setUser(user);
   }
   async function logout() {
@@ -24,7 +24,16 @@ function App() {
     <div className="App">
       <Navbar bg="dark" variant="dark" expand="lg">
         <Navbar.Brand href="/">
-        <Link to={"/"} style={{ textDecoration: "none", color: "white", fontWeight: "bold" }}>Movie Reviews</Link>
+          <Link
+            to={"/"}
+            style={{
+              textDecoration: "none",
+              color: "white",
+              fontWeight: "bold",
+            }}
+          >
+            Movie Reviews
+          </Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

@@ -1,22 +1,26 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
 const Login = (props) => {
   const [name, setName] = useState("");
   const [id, setId] = useState("");
+  const navigate = useNavigate();
+
   const onChangeName = (e) => {
-    const name = e.target.value;
-    setName(name);
+    setName(e.target.value);
   };
+
   const onChangeId = (e) => {
-    const id = e.target.value;
-    setId(id);
+    setId(e.target.value);
   };
+
   const login = () => {
     props.login({ name: name, id: id });
-    props.history.push("/");
+    navigate("/");
   };
+
   return (
     <div>
       <Form>
